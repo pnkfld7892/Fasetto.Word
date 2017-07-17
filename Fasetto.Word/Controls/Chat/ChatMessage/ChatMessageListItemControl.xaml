@@ -32,6 +32,17 @@
             <!--Chat Message Container-->
             <Grid Margin="25 0 25 0" 
                   HorizontalAlignment="{Binding SentByMe,Converter={local:SentByMeToAlignmentConverter}}">
+
+                <Grid.Triggers>
+                    <EventTrigger RoutedEvent="MouseEnter">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation From="0" To="1" Duration="00:00:00.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Grid.Triggers>
+                
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -60,7 +71,9 @@
                       Fill="{Binding SentByMe, Converter={local:SentByMeToBackgroundConverter}}"
                       Data="M 0,0 L 10,10 L 20,0 L 0,0"
                       HorizontalAlignment="{Binding SentByMe,Converter={local:SentByMeToAlignmentConverter}}"/>
-                <StackPanel Grid.Row="2" Orientation="Horizontal">
+                <StackPanel Grid.Row="2" 
+                            Orientation="Horizontal"
+                            Name ="ExtraDetails">
                     <!--Sent time-->
                     <TextBlock 
                                Text="{Binding MessageSentTime, Converter={local:TimeToDisplayTimeConverter}}"

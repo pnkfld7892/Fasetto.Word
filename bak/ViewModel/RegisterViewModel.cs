@@ -9,12 +9,12 @@ namespace Fasetto.Word.Core
 {
 
     /// <summary>
-    /// The View Model for a login screen
+    /// The View Model for a register screen
     /// </summary>
-    public class LoginViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         #region Private Member
-        
+
         
 
         #endregion
@@ -27,9 +27,9 @@ namespace Fasetto.Word.Core
         public string Email { get; set; }
 
         /// <summary>
-        /// A flag indicating if the login command is running
+        /// A flag indicating if the register command is running
         /// </summary>
-        public bool LoginIsRunning { get; set; }
+        public bool RegisterIsRunning { get; set; }
 
 
         #endregion
@@ -50,48 +50,41 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// Default constructor
         /// </summary>
-        public LoginViewModel()
+        public RegisterViewModel()
         {
            
-            LoginCommand = new RelayParameterizedCommand(async (parameter) => await LoginAsync(parameter));
-            RegisterCommand = new RelayCommand(async () => await RegisterAsync());
+            RegisterCommand = new RelayParameterizedCommand(async (parameter) => await RegisterAsync(parameter));
+            LoginCommand = new RelayCommand(async () => await LoginAsync());
 
         }
         #endregion
 
         /// <summary>
-        /// Attempt user login
+        /// Attempt register a new user
         /// </summary>
         /// <param name="parameter">The <see cref="SecureString"/> passed in for the users password</param>
         /// <returns></returns>
-        public async Task LoginAsync(object parameter)
+        public async Task RegisterAsync(object parameter)
         {
 
-            await RunCommandAsync(() => LoginIsRunning, async () =>
+            await RunCommandAsync(() => RegisterIsRunning, async () =>
             {
-                await Task.Delay(1000);
-
-                //Go to chat page
-                IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Chat);
-
-            //    var email = Email;
-            //    //IMPORTANT: Never store unsecure password in variable
-            //    var pass = (parameter as IHavePassword).SecurePassword.Unsecure();
+                await Task.Delay(5000);
             });
 
 
         }
 
         /// <summary>
-        /// Takes User to the Register Page
+        /// Takes User to the login Page
         /// </summary>
         /// <returns></returns>
-        public async Task RegisterAsync()
+        public async Task LoginAsync()
         {
-            
-            
+
+
             // TODO: Go to register page?
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Register);
+            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Login);
 
             await Task.Delay(1);
 
