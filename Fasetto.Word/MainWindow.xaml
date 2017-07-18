@@ -139,18 +139,6 @@
                 <local:ChatListControl/>
             </local:SideMenuControl>
 
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" Height="100" Width="100" RenderTransformOrigin="0.5,0.5">
-                <ScrollViewer.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform Angle="47.282"/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </ScrollViewer.RenderTransform>
-                <Border Height="250" Width="250" Background="Red"/>
-            </ScrollViewer>
-
         </Grid>
     </Border>
 </Window>
