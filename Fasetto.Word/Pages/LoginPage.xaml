@@ -7,7 +7,7 @@
       xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
       mc:Ignorable="d" 
       d:DesignHeight="700" d:DesignWidth="700"
-      Title="LoginPage"
+      
                 x:Name="Page"
       Background="Transparent">
 
@@ -30,11 +30,14 @@
                                           Foreground="{StaticResource ForegroundDarkBrush}"
                                        Margin="0 0 0 20"/>
                             <!--Email-->
-                            <TextBox Text="{Binding Email}" Tag="Email"/>
+                            <TextBox Text="{Binding Email}" Tag="Email"
+                                     local:IsFocusedProperty.Value="True"/>
                             <!--Password-->
                             <PasswordBox x:Name="PasswordText" Tag="Password" Margin="0 0 0 30"/>
-
+                            
+                            <!--Login Button-->
                             <Button Content="Login"
+                                    IsDefault="True"
                                     IsEnabled="{Binding LoginIsRunning, Converter={local:InvertBooleanConverter}}"
                                     local:IsBusyProperty.Value="{Binding LoginIsRunning}"
                                     Command="{Binding LoginCommand}" 

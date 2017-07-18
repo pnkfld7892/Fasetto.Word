@@ -4,13 +4,14 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Media.Animation;
 using Fasetto.Word.Core;
+using System.ComponentModel;
 
 namespace Fasetto.Word
 {
     /// <summary>
     /// THe base page for all pages to gain mase funcitonality
     /// </summary>
-    public class BasePage : Page
+    public class BasePage : UserControl
     {
         #region Public Properties
         public PageAnimation PageLoadAnimation { get; set; } = PageAnimation.SlideAndFadeInFromRight;
@@ -31,6 +32,10 @@ namespace Fasetto.Word
         #region Ctor
         public BasePage()
         {
+            // dont' animating in design time
+            if (DesignerProperties.GetIsInDesignMode(this))
+                return;
+
             if (PageLoadAnimation != PageAnimation.None)
                 Visibility = Visibility.Collapsed;
 
@@ -59,13 +64,14 @@ namespace Fasetto.Word
         /// <returns></returns>
         public async Task AnimateInAsync()
         {
+            
             //make sure we have something to do
             if (PageLoadAnimation == PageAnimation.None)
                 return;
             switch (PageLoadAnimation)
             {
                 case PageAnimation.SlideAndFadeInFromRight:
-                    await this.SlideAndFadeInFromRightAsync(SlideSeconds);
+                    await this.SlideAndFadeInFromRightAsync(SlideSeconds, width: (int)Application.Current.MainWindow.Width);
                     break;
             }
 

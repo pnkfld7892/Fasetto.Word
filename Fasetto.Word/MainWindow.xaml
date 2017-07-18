@@ -122,6 +122,8 @@
                 <ImageBrush TileMode="Tile" ViewportUnits="Absolute"
                             Viewport="0 0 500 500" ImageSource="/Images/Backgrounds/emoji-background.png"/>
             </Grid.Background>
+
+
             <local:PageHost Grid.Column="1" 
                    d:DataContext=""
                    DataContext="{Binding ApplicationViewModel.CurrentPage,

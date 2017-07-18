@@ -7,11 +7,42 @@
       xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
       mc:Ignorable="d"
       x:Name="Page"
-      d:DesignHeight="700" d:DesignWidth="700"
-      Title="Chat"
+      d:DesignHeight="700" d:DesignWidth="700"      
       Background="Transparent">
 
-    <Border>
-        <local:ChatMessageListControl/>
-    </Border>
+    <Grid>
+        <Grid.RowDefinitions>
+            <!--Title Bar-->
+            <RowDefinition Height="Auto"/>
+            <!--Chat List-->
+            <RowDefinition Height="*"/>
+            <!--Message send text-->
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!--Title Bar-->
+        <Grid Grid.Row="0"
+              Height="50"
+              >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <!--Title Text-->
+            <TextBlock Text="Parnell"
+                       Foreground="{StaticResource ForegroundLightBrush}"
+                       FontSize="{StaticResource FontSizeXLarge}"
+                       FontFamily="{StaticResource LatoRegular}"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       Grid.ColumnSpan="2"/>
+            <!--Buttons-->
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+                <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeSearch}"/>
+                <Button Style="{StaticResource IconButton}" Content="{StaticResource FontAwesomeEllipsisVerticalIcon}"/>
+            </StackPanel>
+            
+        </Grid>
+        <local:ChatMessageListControl Grid.Row="1"/>
+    </Grid>
 </local:BasePage>

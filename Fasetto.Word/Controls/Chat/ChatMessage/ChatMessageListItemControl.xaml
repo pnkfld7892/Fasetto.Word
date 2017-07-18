@@ -7,7 +7,7 @@
              xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
              mc:Ignorable="d" d:DesignWidth="300">
     
-    <Border Padding="5" Background="{StaticResource WordBlueBrush}"
+    <Border Padding="5" Background="Transparent"
             d:DataContext="{x:Static core:ChatMessageListItemDesignModel.Instance}">
         <Grid>
             <!--Profile Picutre-->
@@ -34,15 +34,26 @@
                   HorizontalAlignment="{Binding SentByMe,Converter={local:SentByMeToAlignmentConverter}}">
 
                 <Grid.Triggers>
+                    <!--Moust enter shows time-->
                     <EventTrigger RoutedEvent="MouseEnter">
                         <BeginStoryboard>
                             <Storyboard Storyboard.TargetName="ExtraDetails" Storyboard.TargetProperty="Opacity">
-                                <DoubleAnimation From="0" To="1" Duration="00:00:00.5"/>
+                                <DoubleAnimation  To="1" Duration="00:00:00.5"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                    <!--Moust leave shows time-->
+                    <EventTrigger RoutedEvent="MouseLeave">
+                        <BeginStoryboard>
+                            <Storyboard Storyboard.TargetName="ExtraDetails" Storyboard.TargetProperty="Opacity">
+                                <DoubleAnimation  To="0" Duration="00:00:00.5"/>
                             </Storyboard>
                         </BeginStoryboard>
                     </EventTrigger>
                 </Grid.Triggers>
-                
+
+         
+
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -73,12 +84,13 @@
                       HorizontalAlignment="{Binding SentByMe,Converter={local:SentByMeToAlignmentConverter}}"/>
                 <StackPanel Grid.Row="2" 
                             Orientation="Horizontal"
-                            Name ="ExtraDetails">
+                            HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeToAlignmentConverter},ConverterParameter=True}"
+                            Name ="ExtraDetails"
+                            Opacity="0">
                     <!--Sent time-->
                     <TextBlock 
                                Text="{Binding MessageSentTime, Converter={local:TimeToDisplayTimeConverter}}"
                                Foreground="{StaticResource ForegroundLightBrush}"
-                               HorizontalAlignment="Right"
                                FontSize="{StaticResource FontSizeSmall}"
                                FontFamily="{StaticResource LatoRegular}"
                                Margin="0, 0, 15, 0"
@@ -88,7 +100,6 @@
                     <TextBlock 
                                Text="{Binding MessageReadTime, Converter={local:TimeToReadTimeConverter}}"
                                Foreground="{StaticResource WordDarkBlueBrush}"
-                               HorizontalAlignment="Right"
                                FontSize="{StaticResource FontSizeSmall}"
                                FontFamily="{StaticResource LatoRegular}"
                                />
