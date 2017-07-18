@@ -74,7 +74,7 @@
                      VerticalAlignment="Center"
                      BorderThickness="0"
                      AcceptsReturn="True"
-                     Padding="2 10"
+                     Padding="2 10 10 10"
                      AcceptsTab="True"
                      FontFamily="{StaticResource LatoThin}"
                      FontSize="{StaticResource FontSizeRegular}"
