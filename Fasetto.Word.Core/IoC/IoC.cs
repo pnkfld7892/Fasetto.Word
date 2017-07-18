@@ -15,6 +15,8 @@ namespace Fasetto.Word.Core
         /// Kernel of our IoC container
         /// </summary>
         public static IKernel Kernel { get; private set; } = new StandardKernel();
+
+     
         #endregion
 
 
