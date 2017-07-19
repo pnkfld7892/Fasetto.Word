@@ -47,10 +47,12 @@
         <!--Chat List-->
         <local:ChatMessageListControl Grid.Row="1"/>
 
+        <!--Popup Menu for Attachment-->
         <local:BubbleContent Grid.Row="1"
+                             DataContext="{Binding AttachmentMenu}"
                              VerticalAlignment="Bottom"
                              HorizontalAlignment="Left"
-                             local:AnimateSlideInFromBottomProperty.Value="{Binding AttachmentMenuVisible}"/>
+                             local:AnimateSlideInFromBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:ChatPage}}}"/>
 
         <!--Chat Enter-->
         <Grid Grid.Row="2"

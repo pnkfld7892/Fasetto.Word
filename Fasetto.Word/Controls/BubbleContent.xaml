@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fasetto.Word"
-             mc:Ignorable="d" 
+             xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
+             mc:Ignorable="d"
+             d:DataContext="{x:Static core:ChatAttachmentPopupMenuDesignModel.Instance}"
              d:DesignHeight="100" d:DesignWidth="300"
              >
     <!--Chat Message Container-->
@@ -20,7 +22,7 @@
         <Border CornerRadius="10"
                 Padding="15"
                 Margin="5 0 0 0"
-                Background="{StaticResource ForegroundLightBrush}">
+                Background="{Binding BubbleBackground,Converter={local:StringRGBToBrushConverter}}">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="4" ShadowDepth="2" Color="{StaticResource WordLightBlue}"/>
             </Border.Effect>
@@ -39,9 +41,9 @@
               Stroke="{StaticResource ForegroundLightBrush}"
               Margin="15 -1 15 0"
               Panel.ZIndex="1"
-              Fill="{StaticResource ForegroundLightBrush}"
+              Fill="{Binding BubbleBackground,Converter={local:StringRGBToBrushConverter}}"
               Data="M 0,0 L 10,10 L 20,0 L 0,0"
-              HorizontalAlignment="Left">
+              HorizontalAlignment="{Binding ArrowAlignment, Converter={local:HorizontalAlignmentConverter}}">
             <Path.Effect>
                 <DropShadowEffect BlurRadius="3" ShadowDepth="3" Color="{StaticResource WordLightBlue}"/>
             </Path.Effect>
