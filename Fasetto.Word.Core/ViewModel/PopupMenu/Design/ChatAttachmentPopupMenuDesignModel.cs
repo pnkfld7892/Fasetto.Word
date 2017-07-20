@@ -1,10 +1,12 @@
 ﻿
+using System.Collections.Generic;
+
 namespace Fasetto.Word.Core
 {
     /// <summary>
     /// A view model for any popup menu
     /// </summary>
-    public class ChatAttachmentPopupMenuDesignModel : BasePopupMenuViewModel
+    public class ChatAttachmentPopupMenuDesignModel : BasePopupViewModel
     {
 
         #region Singleton

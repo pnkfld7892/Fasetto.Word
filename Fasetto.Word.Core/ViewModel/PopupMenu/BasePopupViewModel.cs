@@ -4,7 +4,7 @@ namespace Fasetto.Word.Core
     /// <summary>
     /// A view model for any popup menu
     /// </summary>
-    public class BasePopupMenuViewModel : BaseViewModel
+    public class BasePopupViewModel : BaseViewModel
     {
 
         #region Public Properties
@@ -13,7 +13,10 @@ namespace Fasetto.Word.Core
         /// </summary>
         public string BubbleBackground { get; set; }
 
-
+        /// <summary>
+        /// The content for the content
+        /// </summary>
+        public BaseViewModel Content { get; set; }
         /// <summary>
         /// The alignment of the bubble arrow
         /// </summary>
@@ -24,7 +27,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// Default Ctor
         /// </summary>
-        public BasePopupMenuViewModel()
+        public BasePopupViewModel()
         {
             //Set defaults
             // TODO: Move colros into core and make use

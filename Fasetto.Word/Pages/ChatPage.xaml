@@ -20,6 +20,14 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         
+        <!--Popup Overlay-->
+        <Border Background="Transparent" Grid.RowSpan="2"
+                Panel.ZIndex="1"
+                Visibility="{Binding AnyPopupVisible,Converter={local:BooleanToVisibilityConverter},ConverterParameter=True}">
+            <Border.InputBindings>
+                <MouseBinding MouseAction="LeftClick" Command="{Binding PopupClickAwayCommand}"/>
+            </Border.InputBindings>
+        </Border>
         <!--Title Bar-->
         <Grid Grid.Row="0"
               Height="50"
@@ -52,13 +60,16 @@
                              DataContext="{Binding AttachmentMenu}"
                              VerticalAlignment="Bottom"
                              HorizontalAlignment="Left"
-                             local:AnimateSlideInFromBottomProperty.Value="{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:ChatPage}}}"/>
+                             local:AnimateSlideInFromBottomProperty.Value=
+                             "{Binding ViewModel.AttachmentMenuVisible, RelativeSource={RelativeSource AncestorType={x:Type local:ChatPage}}}"
+                             Panel.ZIndex="2"/>
 
         <!--Chat Enter-->
         <Grid Grid.Row="2"
               MinHeight="50"
               MaxHeight="112"
-              Background="{StaticResource ForegroundLightBrush}">
+              Background="{StaticResource ForegroundLightBrush}"
+              Panel.ZIndex="3">
             
             <Grid.ColumnDefinitions>
                 <!--Attach Button-->

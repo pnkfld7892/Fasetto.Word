@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 
 namespace Fasetto.Word.Core
@@ -17,6 +18,11 @@ namespace Fasetto.Word.Core
         public bool AttachmentMenuVisible { get; set; }
 
         /// <summary>
+        /// True if any pop menus are visible
+        /// </summary>
+        public bool AnyPopupVisible => AttachmentMenuVisible;
+
+        /// <summary>
         /// View model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
@@ -27,16 +33,24 @@ namespace Fasetto.Word.Core
         #region Public Commands
         public ICommand AttachmentButtonCommand { get; set; }
 
+        /// <summary>
+        /// Command for any area clicked out side of menu
+        /// </summary>
+        public ICommand PopupClickAwayCommand { get; set; }
+
         #endregion
 
         #region Ctor
         public ChatMessageListViewModel()
         {
             AttachmentButtonCommand = new RelayCommand(AttachmentButton);
+            PopupClickAwayCommand = new RelayCommand(PopupClickAway);
 
             //make default menu
             AttachmentMenu = new ChatAttachmentPopupMenuViewModel();
         }
+
+       
         #endregion
 
         #region command methods
@@ -44,6 +58,14 @@ namespace Fasetto.Word.Core
         {
             //toggle menu vis
             AttachmentMenuVisible ^= true;
+        }
+        /// <summary>
+        /// WHen the popclickaway area is clicked hide any popups
+        /// </summary>
+        private void PopupClickAway()
+        {
+            // Hide attachment menu
+            AttachmentMenuVisible = false;
         }
         #endregion
 
