@@ -22,12 +22,24 @@ namespace Fasetto.Word
         {
             base.OnStartup(e);
 
-            //setup IoC
-            IoC.Setup();
+            //Setup the main application
+            ApplicationSetup();
+
 
             //show main window
             Current.MainWindow = new MainWindow();
             Current.MainWindow.Show();
+        }
+
+        /// <summary>
+        /// Configures our application ready for use
+        /// </summary>
+        private void ApplicationSetup()
+        {
+            //setup IoC
+            IoC.Setup();
+            //Bind a ui manager
+            IoC.Kernel.Bind<IUIManager>().ToConstant(new UIManager());
         }
     }
 }
