@@ -96,6 +96,24 @@ namespace Fasetto.Word
     }
 
     /// <summary>
+    /// Animates a fframework element sliding it up from the bottom on show
+    /// and slide out to the bottom on hide
+    /// NOTE: Keeps the margin
+    /// </summary>
+    public class AnimateSlideInFromBottomMarginProperty : AnimateBaseProperty<AnimateSlideInFromBottomMarginProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value)
+        {
+            if (value)
+                //animate in
+                await element.SlideAndFadeInFromBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: true);
+            else
+                //animate out
+                await element.SlideAndFadeOutToBottomAsync(FirstLoad ? 0 : 0.3f, keepMargin: true);
+        }
+    }
+
+    /// <summary>
     /// Animates a fframework element fading in on show
     /// and out on hide
     /// </summary>

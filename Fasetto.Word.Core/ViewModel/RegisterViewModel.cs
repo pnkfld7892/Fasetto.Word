@@ -84,7 +84,7 @@ namespace Fasetto.Word.Core
 
 
             // TODO: Go to register page?
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Login);
+            IoC.Application.GoToPage(ApplicationPage.Login);
 
             await Task.Delay(1);
 

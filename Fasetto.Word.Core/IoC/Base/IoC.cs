@@ -21,7 +21,17 @@ namespace Fasetto.Word.Core
         /// </summary>
         public static IUIManager UI => IoC.Get<IUIManager>();
 
-     
+        /// <summary>
+        /// A shortcut to access the app view model
+        /// </summary>
+        public static ApplicationViewModel Application => IoC.Get<ApplicationViewModel>();
+
+        /// <summary>
+        /// A shortcut to access the app view model
+        /// </summary>
+        public static SettingsViewModel Settings => IoC.Get<SettingsViewModel>();
+
+
         #endregion
 
 
@@ -42,6 +52,8 @@ namespace Fasetto.Word.Core
         {
             //bind to a single instance of application view model
             Kernel.Bind<ApplicationViewModel>().ToConstant(new ApplicationViewModel());
+            //bind to a single instance of settings view model
+            Kernel.Bind<SettingsViewModel>().ToConstant(new SettingsViewModel());
         }
         #endregion
         /// <summary>

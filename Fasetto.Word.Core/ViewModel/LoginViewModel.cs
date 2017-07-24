@@ -72,7 +72,7 @@ namespace Fasetto.Word.Core
                 await Task.Delay(1000);
 
                 //Go to chat page
-                IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Chat);
+                IoC.Application.GoToPage(ApplicationPage.Chat);
 
             //    var email = Email;
             //    //IMPORTANT: Never store unsecure password in variable
@@ -91,7 +91,7 @@ namespace Fasetto.Word.Core
             
             
             // TODO: Go to register page?
-            IoC.Get<ApplicationViewModel>().GoToPage(ApplicationPage.Register);
+            IoC.Application.GoToPage(ApplicationPage.Register);
 
             await Task.Delay(1);
 

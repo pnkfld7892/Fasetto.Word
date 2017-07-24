@@ -16,6 +16,7 @@ namespace Fasetto.Word
         public static ViewModelLocator Instance { get; private set; } = new ViewModelLocator();
 
         public static ApplicationViewModel ApplicationViewModel => IoC.Get<ApplicationViewModel>();
+        public static SettingsViewModel SettingsViewModel => IoC.Get<SettingsViewModel>();
         #endregion
     }
 }

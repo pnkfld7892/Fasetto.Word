@@ -60,6 +60,8 @@ namespace Fasetto.Word {
             //await task
 
             await Task.Delay((int)(seconds * 1000));
+
+
         }
 
         #endregion
@@ -122,6 +124,7 @@ namespace Fasetto.Word {
             //await task
 
             await Task.Delay((int)(seconds * 1000));
+
         }
         #endregion
 
@@ -178,6 +181,9 @@ namespace Fasetto.Word {
             //await task
 
             await Task.Delay((int)(seconds * 1000));
+
+            //Make element invisible
+            element.Visibility = Visibility.Hidden;
         }
 
         #endregion
