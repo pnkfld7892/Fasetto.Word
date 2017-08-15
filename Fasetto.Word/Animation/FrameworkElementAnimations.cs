@@ -27,8 +27,9 @@ namespace Fasetto.Word {
 
             //start animation
             sb.Begin(element);
-            //make page visible
-            element.Visibility = Visibility.Visible;
+            //make page visible if seconds != 0
+            if(seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -55,7 +56,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -91,7 +93,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -119,7 +122,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -149,7 +153,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -165,6 +170,7 @@ namespace Fasetto.Word {
         /// <returns></returns>
         public static async Task SlideAndFadeOutToBottomAsync(this FrameworkElement element, float seconds = 0.3f, bool keepMargin = true, int height = 0)
         {
+
             //create storyboard
             var sb = new Storyboard();
 
@@ -176,7 +182,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -208,7 +215,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 
@@ -232,7 +240,8 @@ namespace Fasetto.Word {
             //start animation
             sb.Begin(element);
             //make page visible
-            element.Visibility = Visibility.Visible;
+            if (seconds != 0)
+                element.Visibility = Visibility.Visible;
 
             //await task
 

@@ -11,6 +11,7 @@ namespace Fasetto.Word
     public abstract class AnimateBaseProperty<Parent>:BaseAttachedProperty<Parent,bool>
         where Parent : BaseAttachedProperty<Parent,bool>, new()
     {
+        protected bool mFirstFire = true;
         #region public properties
         /// <summary>
         /// a flag indication if this is the first time this property has been loaded
@@ -24,12 +25,20 @@ namespace Fasetto.Word
                 return;
 
             //don't fire if the value doesn't change
-            if (sender.GetValue(ValueProperty) == value && !FirstLoad)
+            if ((bool)sender.GetValue(ValueProperty) == (bool)value && !mFirstFire)
                 return;
+
+            //no longer first fire
+            mFirstFire = false;
 
             //ON first load
             if(FirstLoad)
             {
+                //start of hidden before we decvie how to animate
+                //if we are to be animated out initally
+                if(!(bool)value)
+                    element.Visibility = Visibility.Hidden;
+
                 //create single self-unhookalble event
                 RoutedEventHandler onLoaded = null;
                 onLoaded = (ss, ee) =>
