@@ -38,8 +38,11 @@
     <system:String x:Key="FontAwesomePaperClipIcon">&#xf0c6;</system:String>
     <system:String x:Key="FontAwesomeCogIcon">&#xf013;</system:String>
     <system:String x:Key="FontAwesomeSearch">&#xf002;</system:String>
+    <system:String x:Key="FontAwesomeEllipsisHorizontalIcon">&#xf141;</system:String>
     <system:String x:Key="FontAwesomeEllipsisVerticalIcon">&#xf142;</system:String>
     <system:String x:Key="FontAwesomeEmojiIcon">&#xf118;</system:String>
     <system:String x:Key="FontAwesomeArrowLeft">&#xf060;</system:String>
+    <system:String x:Key="FontAwesomeCheck">&#xf00c;</system:String>
+    <system:String x:Key="FontAwesomeClose">&#xf00d;</system:String>
 
 </ResourceDictionary>

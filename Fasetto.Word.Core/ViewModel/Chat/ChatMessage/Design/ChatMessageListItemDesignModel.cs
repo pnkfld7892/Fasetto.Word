@@ -20,7 +20,7 @@ namespace Fasetto.Word.Core
         {
             Initials = "ES";
             SenderName = "Eli";
-            Message = "Merflergen!";
+            Message = "Irshkebergen!";
             ProfilePictureRGB = "3099c5";
             SentByMe = true;
             MessageSentTime = DateTimeOffset.UtcNow;
