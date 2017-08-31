@@ -24,14 +24,25 @@ namespace Fasetto.Word
     {
         public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
-            if (!(sender is TextBoxBase control))
-                return;
-            if ((bool)e.NewValue)
+            if (sender is TextBoxBase control)
             {
-                //focus this control
-                control.Focus();
-                //select all text
-                control.SelectAll();
+                if ((bool)e.NewValue)
+                {
+                    //focus this control
+                    control.Focus();
+                    //select all text
+                    control.SelectAll();
+                }
+            }
+            if (sender is PasswordBox password)
+            {
+                if ((bool)e.NewValue)
+                {
+                    //focus this control
+                    password.Focus();
+                    //select all text
+                    password.SelectAll();
+                }
             }
 
         }

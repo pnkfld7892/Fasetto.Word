@@ -34,6 +34,8 @@ namespace Fasetto.Word
         /// </summary>
         private WindowDockPosition mDockPosition = WindowDockPosition.Undocked;
 
+        private Thickness innerContentPadding = new Thickness(0);
+
         #endregion
 
         #region Public Properties
@@ -61,8 +63,7 @@ namespace Fasetto.Word
         /// </summary>
         public Thickness ResizeBorderThickness => new Thickness(ResizeBorder + OuterMarginSize);
 
-        private Thickness innerContentPadding = new Thickness(0);
-
+        
         public Thickness GetInnerContentPadding()
         {
             return innerContentPadding;

@@ -15,6 +15,8 @@
         <Button Content="{Binding OkText}"
                 FontSize="{StaticResource FontSizeRegular}"
                 Command="{Binding CloseCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:BaseDialogUserControl}}}"
-                HorizontalAlignment="Center"/>
+                HorizontalAlignment="Center"
+                IsDefault="True"
+                IsCancel="True"/>
     </StackPanel>
 </local:BaseDialogUserControl>

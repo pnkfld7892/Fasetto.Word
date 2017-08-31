@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fasetto.Word"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
+             xmlns:core="clr-namespace:Fasetto.Word.Core;assembly=Fasetto.Word.Core"
+             d:DataContext="{x:Static core:SettingsDesignModel.Instance}"
              >
     <Border Padding="20" Background="{StaticResource ForegroundLightBrush}"
             >
@@ -52,7 +54,8 @@
                 
                 <!--Profile Picture-->
                 <Grid Margin=" 0 0 30 0"
-                      Height="{Binding ActualWidth,RelativeSource={RelativeSource Self}}">
+                      Height="{Binding ActualWidth,RelativeSource={RelativeSource Self}}"
+                      VerticalAlignment="Top">
                     <!--Mask for rounded corners-->
                     <Border CornerRadius="8" 
                             Name="Mask"
@@ -63,17 +66,23 @@
                             <VisualBrush Visual="{Binding ElementName=Mask}"/>
                         </Grid.OpacityMask>
                         
-                        <Image Source="/images/samples/rusty.jpg" Stretch="UniformToFill"/>
+                        <Image Source="/images/samples/rusty.jpg" Stretch="UniformToFill" />
                     </Grid>
 
                 </Grid>
 
                 <!-- PRofile Details-->
-                <StackPanel Grid.Column="1">
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
-                    <local:TextEntryControl/>
+                <StackPanel Grid.Column="1"
+                            local:TextEntryWidthMatcherProperty.Value="True">
+                    <local:TextEntryControl  DataContext="{Binding Name}"/>
+                    <local:TextEntryControl  DataContext="{Binding Username}"/>
+                    <local:PasswordEntryControl  DataContext="{Binding Password}"/>
+                    <local:TextEntryControl  DataContext="{Binding Email}"/>
+
+                    <Button Content="{Binding LogoutButtonText}"
+                            FontSize="{StaticResource FontSizeRegular}"
+                            Background="{StaticResource WordOrangeBrush}"
+                            Command="{Binding LogoutCommand}"/>
                 </StackPanel>
                 
             </Grid>
