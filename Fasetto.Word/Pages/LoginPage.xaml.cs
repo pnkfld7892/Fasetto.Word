@@ -22,11 +22,18 @@ namespace Fasetto.Word
     /// </summary>
     public partial class LoginPage : BasePage<LoginViewModel>, IHavePassword
     {
+        #region Constructors
         public LoginPage()
         {
             InitializeComponent();
 
         }
+
+        public LoginPage(LoginViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        } 
+        #endregion
 
         /// <summary>
         /// The Secure password for this login page

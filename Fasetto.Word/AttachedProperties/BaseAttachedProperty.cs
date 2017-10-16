@@ -20,7 +20,7 @@ namespace Fasetto.Word
         public event Action<DependencyObject, DependencyPropertyChangedEventArgs> ValueChanged = (sender, e) => { };
 
         /// <summary>
-        /// Fired w hen the value changes, even when the value is the same
+        /// Fired when the value changes, even when the value is the same
         /// </summary>
         public event Action<DependencyObject, object> ValueUpdated = (sender, value) => { };
 

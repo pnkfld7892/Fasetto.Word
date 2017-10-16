@@ -13,6 +13,11 @@ namespace Fasetto.Word
     /// </summary>
     public class BasePage : UserControl
     {
+
+        #region Private Members
+        private object mViewModel;
+        #endregion
+
         #region Public Properties
         public PageAnimation PageLoadAnimation { get; set; } = PageAnimation.SlideAndFadeInFromRight;
         public PageAnimation PageUnloadAnimation { get; set; } = PageAnimation.SlideAndFadeOutToLeft;
@@ -27,6 +32,24 @@ namespace Fasetto.Word
         /// when loaded into a new frame
         /// </summary>
         public bool ShouldAnimateOut { get; set; }
+
+        public object ViewModelObject
+        {
+            get => mViewModel;
+            set
+            {
+                if (mViewModel == value)
+                    return;
+                //update vm
+                mViewModel = value;
+
+                //Fire viewmodel changed
+                OnViewModelChanged();
+
+                //reset datacontext
+                DataContext = mViewModel;
+            }
+        }
         #endregion
 
         #region Ctor
@@ -92,10 +115,22 @@ namespace Fasetto.Word
                     await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Left, SlideSeconds);
                         //this.SlideAndFadeOutToLeftAsync(SlideSeconds);
                     break;
+                case PageAnimation.SlideAndFadeOutToRight:
+                    await this.SlideAndFadeOutAsync(AnimationSlideInDirection.Right, SlideSeconds);
+                    //this.SlideAndFadeOutToLeftAsync(SlideSeconds);
+                    break;
             }
         }
 
         #endregion
+
+        /// <summary>
+        /// Fired when view model changed
+        /// </summary>
+        protected virtual void OnViewModelChanged()
+        {
+
+        }
     }
 
     /// <summary>
@@ -107,9 +142,6 @@ namespace Fasetto.Word
     {
 
 
-        #region Private Members
-        private VM mViewModel;
-        #endregion
 
         #region Public Properties
         
@@ -118,25 +150,36 @@ namespace Fasetto.Word
         /// </summary>
         public VM ViewModel
         {
-            get => mViewModel;
-            
-            set
-            {
-                if (mViewModel == value)
-                    return;
-                mViewModel = value;
-                DataContext = mViewModel;
-            }
+            get => (VM)ViewModelObject;
+            set => ViewModelObject = value;
         }
 
         #endregion
 
         #region Ctor
+       /// <summary>
+       /// Default Ctor
+       /// </summary>
         public BasePage() : base()
         {
+            ViewModel = IoC.Get<VM>();
 
+        }
+
+        /// <summary>
+        ///  Ctor wiht specific viewmodel
+        /// </summary>
+        /// <param name="specificViewModel">The specific viewmodel to use, if any</param>
+        public BasePage(VM specificViewModel = null) : base()
+        {
+            //Set dpecific view model
+            if (specificViewModel != null)
+                ViewModel = specificViewModel;
             //create default viewmodel
-            ViewModel = new VM();
+            //Using the IoC to bind to the passed in viewmodel
+            //if onedoens't exist a new VM of expected type will be created.
+            else
+            ViewModel = IoC.Get<VM>();
 
         }
         #endregion

@@ -8,11 +8,18 @@ namespace Fasetto.Word
     /// </summary>
     public partial class RegisterPage : BasePage<RegisterViewModel>, IHavePassword
     {
+        #region Constructors
         public RegisterPage()
         {
             InitializeComponent();
 
         }
+
+        public RegisterPage(RegisterViewModel specificViewModel) : base(specificViewModel)
+        {
+            InitializeComponent();
+        } 
+        #endregion
 
         /// <summary>
         /// The Secure password for this login page

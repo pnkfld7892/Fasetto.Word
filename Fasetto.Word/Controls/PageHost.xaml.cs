@@ -27,17 +27,34 @@ namespace Fasetto.Word
         /// <summary>
         /// The current page to show in the page host
         /// </summary>
-        public BasePage CurrentPage
+        public ApplicationPage CurrentPage
         {
-            get => (BasePage)GetValue(CurrentPageProperty);
+            get => (ApplicationPage)GetValue(CurrentPageProperty);
             set => SetValue(CurrentPageProperty, value);
         }
+
+        
 
         /// <summary>
         /// Registers <see cref="CurrentPage"/> as a dependency property
         /// </summary>
         public static readonly DependencyProperty CurrentPageProperty =
-            DependencyProperty.Register(nameof(CurrentPage), typeof(BasePage), typeof(PageHost), new UIPropertyMetadata(CurrentPagePropertyChanged));
+            DependencyProperty.Register(nameof(CurrentPage), typeof(ApplicationPage), typeof(PageHost), new UIPropertyMetadata(default(ApplicationPage), null, CurrentPagePropertyChanged));
+
+        /// <summary>
+        /// The current page viewmodel to show in the page host
+        /// </summary>
+        public BaseViewModel CurrentPageViewModel
+        {
+            get => (BaseViewModel)GetValue(CurrentPageViewModelProperty);
+            set => SetValue(CurrentPageViewModelProperty, value);
+        }
+
+        /// <summary>
+        /// Registers <see cref="CurrentPageViewModel"/> as a dependency property
+        /// </summary>
+        public static readonly DependencyProperty CurrentPageViewModelProperty =
+            DependencyProperty.Register(nameof(CurrentPageViewModel), typeof(BaseViewModel), typeof(PageHost), new UIPropertyMetadata());
 
         #endregion
 
@@ -54,7 +71,7 @@ namespace Fasetto.Word
             //as the dependcy property doesn't fire
             if(DesignerProperties.GetIsInDesignMode(this))
             {
-                this.NewPage.Content =  (BasePage)new ApplicationPageValueConverter().Convert(IoC.Application.CurrentPage);
+                this.NewPage.Content =  CurrentPage.ToBasePage(IoC.Application.CurrentPage);
             }
         }
 
@@ -67,11 +84,27 @@ namespace Fasetto.Word
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void CurrentPagePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static object CurrentPagePropertyChanged(DependencyObject d, object value)
         {
+            // Get current values
+            var currentPage = (ApplicationPage)d.GetValue(CurrentPageProperty);
+            var currentPageViewModel = d.GetValue(CurrentPageViewModelProperty);
+
             // Get the frames
             var newPageFrame = (d as PageHost).NewPage;
             var oldPageFrame = (d as PageHost).OldPage;
+
+            // If the current page hasn't changed
+            // just update the view model
+
+            if (newPageFrame.Content is BasePage page &&
+                page.ToApplicationPage() == currentPage)
+            {
+                // Just update the view model
+                page.ViewModelObject = currentPageViewModel;
+
+                return value;
+            }
 
             // Store the current page content as the old page
             var oldPageContent = newPageFrame.Content;
@@ -86,20 +119,61 @@ namespace Fasetto.Word
             // right after this call due to moving frames
             if (oldPageContent is BasePage oldPage)
             {
-                //tell old page to animate
+                // Tell old page to animate out
                 oldPage.ShouldAnimateOut = true;
-                //once done remove it
-                Task.Delay((int)oldPage.SlideSeconds * 1000).ContinueWith((t) => 
-                {
-                    //remove old page
-                    Application.Current.Dispatcher.Invoke(() => oldPageFrame.Content = null);
-                    Application.Current.Dispatcher.Invoke(() => oldPageFrame = null);
 
+                // Once it is done, remove it
+                Task.Delay((int)(oldPage.SlideSeconds * 1000)).ContinueWith((t) =>
+                {
+                    // Remove old page
+                    Application.Current.Dispatcher.Invoke(() => oldPageFrame.Content = null);
                 });
             }
 
             // Set the new page content
-            newPageFrame.Content = e.NewValue;
+            newPageFrame.Content = currentPage.ToBasePage(currentPageViewModel);
+
+            return value;
+            #region Old Borked Code review later
+            ////Get current values
+            //var currentPage = d.GetValue(CurrentPageProperty);
+            //var currentPageViewModel = d.GetValue(CurrentPageViewModelProperty);
+
+            //// Get the frames
+
+            //var newPageFrame = (d as PageHost).NewPage;
+            //var oldPageFrame = (d as PageHost).OldPage;
+
+            //// Store the current page content as the old page
+            //var oldPageContent = newPageFrame.Content;
+
+            //// Remove current page from new page frame
+            //newPageFrame.Content = null;
+
+            //// Move the previous page into the old page frame
+            //oldPageFrame.Content = oldPageContent;
+
+            //// Animate out previous page when the Loaded event fires
+            //// right after this call due to moving frames
+            //if (oldPageContent is BasePage oldPage)
+            //{
+            //    //tell old page to animate
+            //    oldPage.ShouldAnimateOut = true;
+            //    //once done remove it
+            //    Task.Delay((int)oldPage.SlideSeconds * 1000).ContinueWith((t) => 
+            //    {
+            //        //remove old page
+            //        Application.Current.Dispatcher.Invoke(() => oldPageFrame.Content = null);
+            //        Application.Current.Dispatcher.Invoke(() => oldPageFrame = null);
+
+            //    });
+            //}
+
+            //// Set the new page content
+            //newPageFrame.Content = new ApplicationPageValueConverter().Convert(currentPage,null,currentPageViewModel);
+
+            //return value; 
+            #endregion
         }
 
         #endregion
