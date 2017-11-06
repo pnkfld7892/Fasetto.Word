@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace Fasetto.Word.Core
@@ -13,7 +14,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// The Chat thread items for the list
         /// </summary>
-        public List<ChatMessageListItemViewModel> Items { get; set; }
+        public ObservableCollection<ChatMessageListItemViewModel> Items { get; set; }
 
         public bool AttachmentMenuVisible { get; set; }
 
@@ -26,6 +27,11 @@ namespace Fasetto.Word.Core
         /// View model for the attachment menu
         /// </summary>
         public ChatAttachmentPopupMenuViewModel AttachmentMenu { get; set; }
+
+        /// <summary>
+        /// The message text for the current message being written
+        /// </summary>
+        public string PendingMessageText { get; set; }
 
 
         #endregion
@@ -78,17 +84,22 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// Sends the message
         /// </summary>
-        private  void Send()
+        public  void Send()
         {
-            IoC.UI.ShowMessage(new MessageBoxDialogViewModel
+            if (Items == null)
+                Items = new ObservableCollection<ChatMessageListItemViewModel>();
+            Items.Add(new ChatMessageListItemViewModel
             {
-                Title = "Send Message",
-                Message = "Thank you for wiriting a nice message :)",
-                OkText = "OK"
+                Initials = "ES",
+                Message = PendingMessageText,
+                MessageSentTime = DateTime.UtcNow,
+                SentByMe = true,
+                SenderName = "Eli Schwarz",
+                    NewItem = true
+
             });
-
-            
-
+            //Clear text
+            PendingMessageText = "";
         }
         #endregion
 

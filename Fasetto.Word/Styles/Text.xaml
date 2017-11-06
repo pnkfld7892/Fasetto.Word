@@ -70,6 +70,7 @@
         </Setter>
     </Style>
 
+    <!-- Password Box -->
     <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="FontSize" Value="{StaticResource FontSizeXXLarge}"/>
         <Setter Property="FontFamily" Value="{StaticResource LatoRegular}"/>
@@ -136,6 +137,7 @@
         </Setter>
     </Style>
 
+    <!--spinning text-->
     <Style TargetType="{x:Type TextBlock}" x:Key="SpinningText" BasedOn="{StaticResource BaseTextBlockStyle}">
 
         <Setter Property="FontFamily" Value="{StaticResource FontAwesome}" />

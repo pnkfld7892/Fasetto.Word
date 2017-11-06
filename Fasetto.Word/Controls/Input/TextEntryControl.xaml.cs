@@ -26,7 +26,7 @@ namespace Fasetto.Word
 
         // Using a DependencyProperty as the backing store for LabelWidth.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty LabelWidthProperty =
-            DependencyProperty.Register("LabelWidth", typeof(GridLength), typeof(TextEntryControl), new PropertyMetadata(GridLength.Auto, LableWidthChangedCallback));
+            DependencyProperty.Register("LabelWidth", typeof(GridLength), typeof(TextEntryControl), new PropertyMetadata(GridLength.Auto, LabelWidthChangedCallback));
 
     
         #endregion
@@ -48,7 +48,7 @@ namespace Fasetto.Word
         /// </summary>
         /// <param name="d"></param>
         /// <param name="e"></param>
-        private static void LableWidthChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void LabelWidthChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             try
             {

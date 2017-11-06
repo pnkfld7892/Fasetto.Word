@@ -20,6 +20,33 @@ namespace Fasetto.Word
     /// <summary>
     /// Focuses this element if true
     /// </summary>
+    public class FocusProperty : BaseAttachedProperty<FocusProperty, bool>
+    {
+        public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (sender is TextBoxBase control)
+            {
+                if ((bool)e.NewValue)
+                {
+                    //focus this control
+                    control.Focus();
+                }
+            }
+            if (sender is PasswordBox password)
+            {
+                if ((bool)e.NewValue)
+                {
+                    //focus this control
+                    password.Focus();
+                }
+            }
+
+        }
+    }
+
+    /// <summary>
+    /// Focuses this element if true
+    /// </summary>
     public class FocusAndSelectProperty : BaseAttachedProperty<FocusAndSelectProperty, bool>
     {
         public override void OnValueChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
@@ -47,4 +74,5 @@ namespace Fasetto.Word
 
         }
     }
+    
 }

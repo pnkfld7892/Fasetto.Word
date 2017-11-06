@@ -55,8 +55,46 @@ namespace Fasetto.Word
             var storyboard = new Storyboard();
             storyboard.AddFadeIn(1);
             storyboard.Begin(ChatMessageList);
+
+            //make the message text box focused
+            MessageText.Focus();
         }
+
         #endregion
 
+        /// <summary>
+        /// Preview the input into he message box and respond as required
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MessageText_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            var textbox = sender as TextBox;
+
+            if(e.Key == Key.Enter)
+            {
+                //if we have
+                if (Keyboard.Modifiers.HasFlag(ModifierKeys.Control))
+                {
+                    //add new line at curosr
+                    var index = textbox.CaretIndex;
+
+                    //insert new line
+                    textbox.Text = textbox.Text.Insert(index, Environment.NewLine);
+
+                    //shift caret forward
+                    textbox.CaretIndex = index + Environment.NewLine.Length;
+                    //mark as handled
+                    e.Handled = true;
+                    
+                }
+                else
+                {
+                    ViewModel.Send();
+                    //handle the event
+                    e.Handled = true; 
+                }
+            }
+        }
     }
 }

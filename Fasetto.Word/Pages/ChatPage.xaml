@@ -96,11 +96,15 @@
             
             <!--Text Entry-->
             <TextBox Tag="Write a message..." Grid.Column="1"
+                     x:Name="MessageText"
+                     Text="{Binding PendingMessageText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
+                     local:IsFocusedProperty.Value="True"
                      BorderThickness="0"
-                     AcceptsReturn="True"
+                     PreviewKeyDown="MessageText_PreviewKeyDown"
                      Padding="2 10 10 10"
                      AcceptsTab="True"
+                     AcceptsReturn="True"
                      FontFamily="{StaticResource LatoThin}"
                      FontSize="{StaticResource FontSizeRegular}"
                      VerticalScrollBarVisibility="Auto"/>
@@ -122,6 +126,8 @@
                     Background="{StaticResource WordGreenBrush}"
                     FontSize="{StaticResource FontSizeRegular}"
                     Command="{Binding SendCommand}"
+                    IsDefault="True"
+                    Focusable="False"
                     />
             </StackPanel>
 

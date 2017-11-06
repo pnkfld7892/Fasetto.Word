@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Fasetto.Word
 {
@@ -46,8 +47,8 @@ namespace Fasetto.Word
 
                 // Start off hidden before we decide how to animate
                 // if we are to be animated out initially
-                if (!(bool)value)
-                    element.Visibility = Visibility.Hidden;
+                //if (!(bool)value)
+                element.Visibility = Visibility.Hidden;
 
                 // Create a single self-unhookable event 
                 // for the elements Loaded event
@@ -141,6 +142,19 @@ namespace Fasetto.Word
     }
 
     /// <summary>
+    /// Animates a framework element sliding up from the bottom on load
+    /// if the value is true
+    /// </summary>
+    public class AnimateSlideInFromBottomOnLoadProperty : AnimateBaseProperty<AnimateSlideInFromBottomOnLoadProperty>
+    {
+        protected override async void DoAnimation(FrameworkElement element, bool value, bool firstLoad)
+        {
+                // Animate in
+                await element.SlideAndFadeInAsync(AnimationSlideInDirection.Bottom, !value, !value ? 0 : 0.3f, keepMargin: false);
+        }
+    }
+
+    /// <summary>
     /// Animates a framework element fading in on show
     /// and fading out on hide
     /// </summary>
@@ -154,6 +168,28 @@ namespace Fasetto.Word
             else
                 // Animate out
                 await element.FadeOutAsync(firstLoad ? 0 : 0.3f);
+        }
+    }
+
+    /// <summary>
+    /// Fades in an image once the source changes
+    /// </summary>
+    public class FadeInImageOnLoadProperty: AnimateBaseProperty<FadeInImageOnLoadProperty>
+    {
+        public override void OnValueUpdated(DependencyObject sender, object value)
+        {
+            if (!(sender is Image image))
+                return;
+            if ((bool)value)
+                image.TargetUpdated += Image_TargetUpdatedAsync;
+            else
+                image.TargetUpdated -= Image_TargetUpdatedAsync;
+        }
+
+        private async void Image_TargetUpdatedAsync(object sender, System.Windows.Data.DataTransferEventArgs e)
+        {
+            //fade in image
+            await (sender as Image).FadeInAsync(false);
         }
     }
 

@@ -50,6 +50,7 @@
                             HorizontalAlignment="Center" 
                             Style="{StaticResource TextButton}"
                             Command="{Binding RegisterCommand}"/>
+                    
 
                 </StackPanel>
             </ScrollViewer>

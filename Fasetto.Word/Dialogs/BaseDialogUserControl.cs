@@ -94,6 +94,10 @@ namespace Fasetto.Word
                     //Set this contorls datacontext to the view model
                     DataContext = viewModel;
 
+                    //Show In the center of the parent
+                    mDialogWindow.Owner = Application.Current.MainWindow;
+                    mDialogWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+
                     //show dialog
                     mDialogWindow.ShowDialog();
                 }

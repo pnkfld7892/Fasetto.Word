@@ -14,6 +14,8 @@ namespace Fasetto.Word.Core
         public void OnPropertyChanged(string name)
         {
             PropertyChanged(this, new PropertyChangedEventArgs(name));
+            Console.WriteLine("Property {0} changed", name);
+            Console.WriteLine("The current application page is {0}", IoC.Get<ApplicationViewModel>().CurrentPage);
         }
 
         #region Command Helpers
