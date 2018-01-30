@@ -27,10 +27,10 @@ namespace Fasetto.Word
 
             IoC.Logger.Log("Application starting up...", LogLevel.Debug);
 
-            IoC.Task.Run(() =>
-            {
-                throw new ArgumentNullException("Oooops code crash");
-            });
+            //IoC.Task.Run(() =>
+            //{
+            //    throw new ArgumentNullException("Oooops code crash");
+            //});
 
             //show main window
             Current.MainWindow = new MainWindow();
