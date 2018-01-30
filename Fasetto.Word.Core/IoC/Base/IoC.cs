@@ -22,6 +22,21 @@ namespace Fasetto.Word.Core
         public static IUIManager UI => IoC.Get<IUIManager>();
 
         /// <summary>
+        /// A shortcut to access the LogFactory
+        /// </summary>
+        public static ILogFactory Logger => IoC.Get<ILogFactory>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="IFileManager"/>
+        /// </summary>
+        public static IFileManager File => IoC.Get<IFileManager>();
+
+        /// <summary>
+        /// A shortcut to access the <see cref="ITaskManager"/>
+        /// </summary>
+        public static ITaskManager Task => IoC.Get<ITaskManager>();
+
+        /// <summary>
         /// A shortcut to access the app view model
         /// </summary>
         public static ApplicationViewModel Application => IoC.Get<ApplicationViewModel>();

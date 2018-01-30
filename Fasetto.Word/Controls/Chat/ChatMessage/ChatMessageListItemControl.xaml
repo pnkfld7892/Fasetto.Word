@@ -99,6 +99,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <!--Speech Bubble rectangle-->
                         <Border CornerRadius="10"
@@ -122,17 +123,15 @@
                               Fill="{Binding SentByMe, Converter={local:SentByMeToBackgroundConverter}}"
                               Data="M 0,0 L 10,10 L 20,0 L 0,0"
                               HorizontalAlignment="{Binding SentByMe,Converter={local:SentByMeToAlignmentConverter}}"/>
-                    </Grid>
-                </Grid>
-
-                <!--Time Container-->
-                <StackPanel Grid.Row="1" 
+                        
+                        <!--Time Container-->
+                        <StackPanel Grid.Row="2" 
                             Orientation="Horizontal"
                             HorizontalAlignment="{Binding SentByMe, Converter={local:SentByMeToAlignmentConverter},ConverterParameter=True}"
                             Name ="ExtraDetails"
                             Opacity="0">
-                    <!--Sent time-->
-                    <TextBlock 
+                            <!--Sent time-->
+                            <TextBlock 
                                Text="{Binding MessageSentTime, Converter={local:TimeToDisplayTimeConverter}}"
                                Foreground="{StaticResource ForegroundLightBrush}"
                                FontSize="{StaticResource FontSizeSmall}"
@@ -140,14 +139,18 @@
                                Margin="0, 0, 15, 0"
                                />
 
-                    <!--Read time-->
-                    <TextBlock 
+                            <!--Read time-->
+                            <TextBlock 
                                Text="{Binding MessageReadTime, Converter={local:TimeToReadTimeConverter}}"
                                Foreground="{StaticResource WordDarkBlueBrush}"
                                FontSize="{StaticResource FontSizeSmall}"
                                FontFamily="{StaticResource LatoRegular}"
                                />
-                </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+
+                
 
             </Grid>
         </Grid>

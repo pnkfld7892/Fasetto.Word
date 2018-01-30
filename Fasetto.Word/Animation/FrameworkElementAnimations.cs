@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Fasetto.Word.Core;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -171,7 +172,7 @@ namespace Fasetto.Word {
 
         #endregion
 
-        #region Marquee
+        //#region Marquee
 
         ///// <summary>
         ///// Animates a marquee style element
@@ -197,7 +198,7 @@ namespace Fasetto.Word {
         //    element.Unloaded += (s, e) => unloaded = true;
 
         //    // Run a loop off the caller thread
-        //    Task.Run(async () =>
+        //    IoC.Task.Run(async () =>
         //    {
         //        // While the element is still available, recheck the size
         //        // after every loop in case the container was resized
@@ -245,7 +246,7 @@ namespace Fasetto.Word {
         //    });
         //}
 
-        #endregion
+        //#endregion
     }
 
     //public static class FrameworkElementAnimations

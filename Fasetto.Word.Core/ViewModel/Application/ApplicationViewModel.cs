@@ -15,7 +15,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// The Current page of the application
         /// </summary>
-        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Login;
+        public ApplicationPage CurrentPage { get; private set; } = ApplicationPage.Chat;
 
         /// <summary>
         /// The view model to use for the current page when the current page changes
@@ -28,7 +28,7 @@ namespace Fasetto.Word.Core
         /// <summary>
         /// True if the side menu should be shown
         /// </summary>
-        public bool SideMenuVisible { get; set; }
+        public bool SideMenuVisible { get; set; } = true;
 
         /// <summary>
         /// True if the settings menu should be shown
@@ -47,12 +47,7 @@ namespace Fasetto.Word.Core
 
             //set the new view model
             CurrentPageViewModel = viewModel;
-
-
-            Console.WriteLine("Current Page inside Application View Model is {0}", CurrentPage);
             CurrentPage = page;
-            Console.WriteLine("Current Page inside Application View Model is now {0}", CurrentPage);
-            Console.WriteLine("The nameof Current Page inside Application View Model is {0}", nameof(CurrentPage));
 
             //fire off a current page chagned event
             OnPropertyChanged(nameof(CurrentPage));

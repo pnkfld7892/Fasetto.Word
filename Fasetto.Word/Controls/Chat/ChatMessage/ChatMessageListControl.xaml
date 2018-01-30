@@ -12,7 +12,7 @@
         <ScrollViewer VerticalScrollBarVisibility="Auto"
                       local:ScrollToBottomOnLoadProperty.Value ="True"
                       local:AutoScrollToBottomProperty.Value="True">
-            <ItemsControl ItemsSource="{Binding Items}">
+            <ItemsControl ItemsSource="{Binding FilteredItems}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <local:ChatMessageListItemControl

@@ -39,18 +39,59 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!--Title Text-->
-            <TextBlock Text="Parnell"
+            <TextBlock Text="{Binding DisplayTitle}"
                        Foreground="{StaticResource ForegroundLightBrush}"
                        FontSize="{StaticResource FontSizeXLarge}"
                        FontFamily="{StaticResource LatoRegular}"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Grid.ColumnSpan="2"/>
+            
             <!--Buttons-->
             <StackPanel Orientation="Horizontal" Grid.Column="1">
-                <Button Style="{StaticResource IconGrowButton}" Content="{StaticResource FontAwesomeSearch}"/>
-                <Button Style="{StaticResource IconGrowButton}" Content="{StaticResource FontAwesomeEllipsisVerticalIcon}"/>
+                <!-- Search Button -->
+                <Button Style="{StaticResource IconGrowButton}" 
+                        Content="{StaticResource FontAwesomeSearch}"
+                        Command="{Binding OpenSearchCommand}"/>
+                
+                <Button Style="{StaticResource IconGrowButton}" 
+                        Content="{StaticResource FontAwesomeEllipsisVerticalIcon}"/>
             </StackPanel>
+
+            <!-- Search Overlay -->
+            <Grid Grid.ColumnSpan="2"
+                  Visibility="Collapsed"
+                  local:AnimateSlideInFromRightMarginProperty.Value="{Binding SearchIsOpen}"
+                  >
+                <Grid.ColumnDefinitions>
+                    <!-- Close button -->
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- Search Bar -->
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!-- Close Search button-->
+                <Button Grid.Column="0"
+                        Foreground="{StaticResource WordOrangeBrush}"
+                    Style="{StaticResource IconGrowButton}" 
+                        Content="{StaticResource FontAwesomeClose}"
+                        Command="{Binding CloseSearchCommand}"/>
+
+                <!-- Search Box -->
+                <TextBox
+                    Tag="Search..." 
+                    Grid.Column="1"
+                    Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                    Margin="0 5 5 5"
+                    FontSize="{StaticResource FontSizeRegular}"
+                    local:FocusProperty.Value="{Binding SearchIsOpen}">
+                    <TextBox.InputBindings>
+                        <!-- Clear text on esc -->
+                        <KeyBinding Command="{Binding ClearSearchCommand}" Key="Esc"/>
+                        <!-- Search on enter -->
+                        <KeyBinding Command="{Binding SearchCommand}" Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
+            </Grid>
 
         </Grid>
         <!--Chat List-->
@@ -95,8 +136,9 @@
                     Command="{Binding AttachmentButtonCommand}"/>
             
             <!--Text Entry-->
-            <TextBox Tag="Write a message..." Grid.Column="1"
-                     x:Name="MessageText"
+            <TextBox x:Name="MessageText"
+                     Tag="Write a message..." 
+                     Grid.Column="1"
                      Text="{Binding PendingMessageText, UpdateSourceTrigger=PropertyChanged}"
                      VerticalAlignment="Center"
                      local:IsFocusedProperty.Value="True"

@@ -15,7 +15,7 @@ namespace Fasetto.Word
     public partial class App : Application
     {
         /// <summary>
-        /// Custom start up to load IoC container immediatly
+        /// Custom start up to load IoC container immediately
         /// </summary>
         /// <param name="e"></param>
         protected override void OnStartup(StartupEventArgs e)
@@ -25,6 +25,12 @@ namespace Fasetto.Word
             //Setup the main application
             ApplicationSetup();
 
+            IoC.Logger.Log("Application starting up...", LogLevel.Debug);
+
+            IoC.Task.Run(() =>
+            {
+                throw new ArgumentNullException("Oooops code crash");
+            });
 
             //show main window
             Current.MainWindow = new MainWindow();
@@ -38,7 +44,22 @@ namespace Fasetto.Word
         {
             //setup IoC
             IoC.Setup();
-            //Bind a ui manager
+
+            //Bind a logger
+            IoC.Kernel.Bind<ILogFactory>().ToConstant(new BaseLogFactory(new[] 
+            {
+                //TODO: Add ApplicationSettings so we can set/edit a log location
+                //      for now just log to the path where this application is running
+                new FileLogger("log.txt")
+            }));
+
+            //bind to Task
+            IoC.Kernel.Bind<ITaskManager>().ToConstant(new TaskManager());
+
+            //Bind a file manager
+            IoC.Kernel.Bind<IFileManager>().ToConstant(new FileManager());
+            
+            //Bind a UI manager
             IoC.Kernel.Bind<IUIManager>().ToConstant(new UIManager());
         }
     }
