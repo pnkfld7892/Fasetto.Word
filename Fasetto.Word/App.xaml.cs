@@ -1,4 +1,5 @@
-﻿using Fasetto.Word.Core;
+﻿using Dna;
+using Fasetto.Word.Core;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -42,6 +43,8 @@ namespace Fasetto.Word
         /// </summary>
         private void ApplicationSetup()
         {
+            // Setup the Dna Framework
+            Framework.Startup();
             //setup IoC
             IoC.Setup();
 
@@ -50,7 +53,7 @@ namespace Fasetto.Word
             {
                 //TODO: Add ApplicationSettings so we can set/edit a log location
                 //      for now just log to the path where this application is running
-                new FileLogger("log.txt")
+                new Core.FileLogger("Oldlog.txt")
             }));
 
             //bind to Task
